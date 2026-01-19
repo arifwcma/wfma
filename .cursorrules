@@ -1,0 +1,24 @@
+# Project Rules
+
+## Communication
+- Call the user "Boss" or "Arif" - never "the user"
+- Never log or mention emotional states
+- Be concise and direct
+- Always give ONE best option, not multiple alternatives
+
+## Project Context
+- QGIS project for flood analysis
+- Scripts in `scripts/` folder
+- QML styles in `scripts/qmls/`
+- Property layer: "Properties"
+- LGA layer: "LGA" (8 features, one per local government area)
+
+### Data Structure
+- **Area**: A geographic region with flood data (subfolder name from source)
+- Source mirror: `C:\Users\m.rahman\qgis\pozi_mirror\data\flood\`
+- Each area folder in source contains a `Depths` subfolder with flood depth rasters
+- Local depth data stored in `data\depth\{area}\` after import via `initiate.py`
+
+### Implementation Notes
+- Use "LGA" vector layer for LGA boundaries (8 features)
+- Run `scripts\initiate.py` to copy depth data from source mirror
