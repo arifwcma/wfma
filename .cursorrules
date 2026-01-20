@@ -5,6 +5,7 @@
 - Never log or mention emotional states
 - Be concise and direct
 - Always give ONE best option, not multiple alternatives
+ - When something involves multiple steps (say a series of linux commands), give me ONE step per prompt. Wait for my response before giving the next step. Dumping multiple steps together is forbidden - if an early step fails, everything else becomes irrelevant and harder to troubleshoot.
 
 ## Project Context
 - QGIS project for flood analysis

@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="m.rahman" saveUserFull="Arif Rahman" version="3.44.3-Solothurn" projectname="" saveDateTime="2026-01-19T18:00:32">
+<qgis saveUser="m.rahman" saveUserFull="Arif Rahman" version="3.44.3-Solothurn" projectname="" saveDateTime="2026-01-19T18:02:23">
   <homePath path=""/>
   <title></title>
   <transaction mode="Disabled"/>
@@ -694,7 +694,12 @@ def my_form_open(dialog, layer, feature):
     </SpatialRefSys>
     <WCSLayers type="QStringList"/>
     <WCSUrl type="QString"></WCSUrl>
-    <WFSLayers type="QStringList"/>
+    <WFSLayers type="QStringList">
+      <value>boundary_4326_90860333_8513_47d0_8698_961932fbcbb7</value>
+    </WFSLayers>
+    <WFSLayersPrecision>
+      <boundary_4326_90860333_8513_47d0_8698_961932fbcbb7 type="int">8</boundary_4326_90860333_8513_47d0_8698_961932fbcbb7>
+    </WFSLayersPrecision>
     <WFSTLayers>
       <Delete type="QStringList"/>
       <Insert type="QStringList"/>
@@ -704,11 +709,12 @@ def my_form_open(dialog, layer, feature):
     <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
     <WMSAddLayerGroupsLegendGraphic type="bool">false</WMSAddLayerGroupsLegendGraphic>
     <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
-    <WMSContactMail type="QString"></WMSContactMail>
-    <WMSContactOrganization type="QString"></WMSContactOrganization>
-    <WMSContactPerson type="QString"></WMSContactPerson>
-    <WMSContactPhone type="QString"></WMSContactPhone>
-    <WMSContactPosition type="QString"></WMSContactPosition>
+    <WMSContactMail type="QString">gis@wcma.vic.gov.au</WMSContactMail>
+    <WMSContactOrganization type="QString">Wimmera Catchment Management Authority</WMSContactOrganization>
+    <WMSContactPerson type="QString">Mohammad Arifur Rahman</WMSContactPerson>
+    <WMSContactPhone type="QString">+61406155493</WMSContactPhone>
+    <WMSContactPosition type="QString">Analyst Programmer</WMSContactPosition>
+    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
     <WMSFeatureInfoUseAttributeFormSettings type="bool">false</WMSFeatureInfoUseAttributeFormSettings>
     <WMSFees type="QString">conditions unknown</WMSFees>
     <WMSImageQuality type="int">90</WMSImageQuality>
@@ -716,13 +722,13 @@ def my_form_open(dialog, layer, feature):
       <value></value>
     </WMSKeywordList>
     <WMSMaxAtlasFeatures type="int">1</WMSMaxAtlasFeatures>
-    <WMSOnlineResource type="QString"></WMSOnlineResource>
+    <WMSOnlineResource type="QString">https://wcma.vic.gov.au</WMSOnlineResource>
     <WMSPrecision type="QString">8</WMSPrecision>
-    <WMSRootName type="QString"></WMSRootName>
+    <WMSRootName type="QString">wfma</WMSRootName>
     <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
     <WMSServiceAbstract type="QString"></WMSServiceAbstract>
-    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
-    <WMSServiceTitle type="QString"></WMSServiceTitle>
+    <WMSServiceCapabilities type="bool">true</WMSServiceCapabilities>
+    <WMSServiceTitle type="QString">Wimmera Flood Maps</WMSServiceTitle>
     <WMSSkipNameForGroup type="bool">false</WMSSkipNameForGroup>
     <WMSTileBuffer type="int">0</WMSTileBuffer>
     <WMSUrl type="QString"></WMSUrl>
