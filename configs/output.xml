@@ -1,0 +1,134 @@
+<WFS_Capabilities xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" xmlns:ows="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1.0" xmlns="http://www.opengis.net/wfs" xmlns:xlink="http://www.w3.org/1999/xlink" updateSequence="0" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc">
+ <ows:ServiceIdentification>
+  <ows:Title>Wimmera Flood Maps</ows:Title>
+  <ows:ServiceType>WFS</ows:ServiceType>
+  <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+  <ows:Fees>conditions unknown</ows:Fees>
+  <ows:AccessConstraints>None</ows:AccessConstraints>
+ </ows:ServiceIdentification>
+ <ows:ServiceProvider>
+  <ows:ProviderName>Wimmera Catchment Management Authority</ows:ProviderName>
+  <ows:ServiceContact>
+   <ows:IndividualName>Mohammad Arifur Rahman</ows:IndividualName>
+   <ows:PositionName>Analyst Programmer</ows:PositionName>
+   <ows:Role>PointOfContact</ows:Role>
+  </ows:ServiceContact>
+ </ows:ServiceProvider>
+ <ows:OperationsMetadata>
+  <ows:Operation name="GetCapabilities">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+     <ows:Post xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+    </ows:HTTP>
+   </ows:DCP>
+   <ows:Parameter name="service">
+    <ows:Value>WFS</ows:Value>
+   </ows:Parameter>
+   <ows:Parameter name="AcceptVersions">
+    <ows:Value>1.1.0</ows:Value>
+    <ows:Value>1.0.0</ows:Value>
+   </ows:Parameter>
+   <ows:Parameter name="AcceptFormats">
+    <ows:Value>text/xml</ows:Value>
+   </ows:Parameter>
+  </ows:Operation>
+  <ows:Operation name="DescribeFeatureType">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+     <ows:Post xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+    </ows:HTTP>
+   </ows:DCP>
+   <ows:Parameter name="outputFormat">
+    <ows:Value>XMLSCHEMA</ows:Value>
+    <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+    <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+   </ows:Parameter>
+  </ows:Operation>
+  <ows:Operation name="GetFeature">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+     <ows:Post xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+    </ows:HTTP>
+   </ows:DCP>
+   <ows:Parameter name="outputFormat">
+    <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+    <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+    <ows:Value>application/vnd.geo+json</ows:Value>
+   </ows:Parameter>
+   <ows:Parameter name="resultType">
+    <ows:Value>results</ows:Value>
+    <ows:Value>hits</ows:Value>
+   </ows:Parameter>
+  </ows:Operation>
+  <ows:Operation name="Transaction">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+     <ows:Post xlink:href="http://localhost/qgis/?MAP=/var/www/qgis/wfma/wfma.qgs"/>
+    </ows:HTTP>
+   </ows:DCP>
+   <ows:Parameter name="inputFormat">
+    <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+    <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+    <ows:Value>application/vnd.geo+json</ows:Value>
+   </ows:Parameter>
+  </ows:Operation>
+ </ows:OperationsMetadata>
+ <FeatureTypeList>
+  <Operations>
+   <Operation>Query</Operation>
+  </Operations>
+  <FeatureType>
+   <Name>boundary</Name>
+   <Title>boundary</Title>
+   <DefaultSRS>EPSG:3857</DefaultSRS>
+   <OtherSRS>EPSG:4326</OtherSRS>
+   <Operations>
+    <Operation>Query</Operation>
+   </Operations>
+   <ows:WGS84BoundingBox dimensions="2">
+    <ows:LowerCorner>140.963783 -37.368097</ows:LowerCorner>
+    <ows:UpperCorner>143.363962 -35.656805</ows:UpperCorner>
+   </ows:WGS84BoundingBox>
+  </FeatureType>
+ </FeatureTypeList>
+ <ogc:Filter_Capabilities>
+  <ogc:Spatial_Capabilities>
+   <ogc:GeometryOperands>
+    <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
+    <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
+    <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
+    <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
+   </ogc:GeometryOperands>
+   <ogc:SpatialOperators>
+    <ogc:SpatialOperator name="Equals"/>
+    <ogc:SpatialOperator name="Disjoint"/>
+    <ogc:SpatialOperator name="Touches"/>
+    <ogc:SpatialOperator name="Within"/>
+    <ogc:SpatialOperator name="Overlaps"/>
+    <ogc:SpatialOperator name="Crosses"/>
+    <ogc:SpatialOperator name="Intersects"/>
+    <ogc:SpatialOperator name="Contains"/>
+    <ogc:SpatialOperator name="BBOX"/>
+   </ogc:SpatialOperators>
+  </ogc:Spatial_Capabilities>
+  <ogc:Scalar_Capabilities>
+   <ogc:LogicalOperators/>
+   <ogc:ComparisonOperators>
+    <ogc:ComparisonOperator>LessThan</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>EqualTo</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>Like</ogc:ComparisonOperator>
+    <ogc:ComparisonOperator>Between</ogc:ComparisonOperator>
+   </ogc:ComparisonOperators>
+  </ogc:Scalar_Capabilities>
+  <ogc:Id_Capabilities>
+   <ogc:FID/>
+  </ogc:Id_Capabilities>
+ </ogc:Filter_Capabilities>
+</WFS_Capabilities>
