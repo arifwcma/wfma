@@ -1,13 +1,14 @@
 r"""
-Import Depths - Standalone QGIS Script
+Setup Depths - Standalone QGIS Script
 
 For each subfolder in data\depth:
   - Create a layer tree group named after the subfolder
   - Add each GeoTIFF in that subfolder into the group
   - Force CRS to EPSG:7854
+  - Apply depth.qml style
 
 Usage:
-    python-qgis import_depths.py
+    python-qgis setup.py
 """
 
 import sys
@@ -25,6 +26,7 @@ SCRIPT_DIR = Path(__file__).parent.resolve()
 PROJECT_DIR = SCRIPT_DIR.parent
 PROJECT_FILE = PROJECT_DIR / "wfma.qgs"
 DEPTH_DIR = PROJECT_DIR / "data" / "depth"
+DEPTH_STYLE = r"C:\Users\m.rahman\qgis\wfma\scripts\qmls\depth.qml"
 
 
 def init_qgis():
@@ -43,10 +45,10 @@ def layer_exists_in_group(group, layer_name):
     return False
 
 
-def import_depths():
-    """Main function to import depth rasters."""
+def setup_depths():
+    """Main function to import and style depth rasters."""
     print("=" * 60)
-    print("Import Depths")
+    print("Setup Depths")
     print("=" * 60)
 
     # Initialize QGIS
@@ -72,8 +74,21 @@ def import_depths():
             print("ERROR: Depth directory not found!")
             return False
 
+        # Check style file
+        print(f"Style file: {DEPTH_STYLE}")
+        if not Path(DEPTH_STYLE).exists():
+            print("WARNING: Style file not found, layers will use default style.")
+
         # Get layer tree root
         root = project.layerTreeRoot()
+
+        # Find or create "Depth" parent group
+        depth_group = root.findGroup("Depth")
+        if depth_group is None:
+            depth_group = root.addGroup("Depth")
+            print("Created parent group: Depth")
+        else:
+            print("Using existing parent group: Depth")
 
         # Find subfolders
         subfolders = sorted(
@@ -96,10 +111,10 @@ def import_depths():
             folder_name = folder.name
             print(f"\n  Processing: {folder_name}")
 
-            # Find or create group
-            group = root.findGroup(folder_name)
+            # Find or create group under Depth
+            group = depth_group.findGroup(folder_name)
             if group is None:
-                group = root.addGroup(folder_name)
+                group = depth_group.addGroup(folder_name)
                 print(f"    Created group: {folder_name}")
             else:
                 print(f"    Using existing group: {folder_name}")
@@ -131,6 +146,9 @@ def import_depths():
 
                 # Set CRS
                 layer.setCrs(target_crs)
+
+                # Apply style
+                layer.loadNamedStyle(DEPTH_STYLE)
 
                 # Add to project and group
                 project.addMapLayer(layer, False)
@@ -164,5 +182,5 @@ def import_depths():
 
 
 if __name__ == "__main__":
-    success = import_depths()
+    success = setup_depths()
     sys.exit(0 if success else 1)
