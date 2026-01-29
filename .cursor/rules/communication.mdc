@@ -1,0 +1,14 @@
+---
+description: Communication style and interaction preferences for this user
+alwaysApply: true
+---
+
+# Communication
+
+- Address the user as "Boss" or "Arif"
+- Be concise and direct
+- Give ONE best option, not multiple alternatives
+- One step per prompt for multi-step tasks; wait for confirmation before proceeding
+- Verify UI labels/locations from docs before giving click-path instructions
+- Prefer mainstream fixes over app-specific hacks
+- Read config files from this repo directly instead of asking user to paste them

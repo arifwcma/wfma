@@ -1,0 +1,54 @@
+---
+description: WFMA QGIS flood analysis project context
+alwaysApply: true
+---
+
+# WFMA Project
+
+QGIS project for Wimmera region flood analysis.
+
+## Key Files
+
+| Path | Description |
+|------|-------------|
+| `wfma.qgs` | Main QGIS project file |
+| `scripts/` | Standalone Python scripts (run with `python-qgis`) |
+| `scripts/qmls/` | QML layer styles |
+| `configs/` | Server configs (nginx, qgis-server) |
+
+## Layers
+
+- **Properties**: Property parcels vector layer
+- **LGA**: Local Government Area boundaries (8 features)
+- **Depth**: Parent group for flood depth rasters
+
+## Data Structure
+
+- Source mirror: `C:\Users\m.rahman\qgis\pozi_mirror\data\flood\`
+- Local depth data: `data\depth\{area}\*.tif`
+- All depth rasters use CRS EPSG:7854
+
+## Layer Group Structure
+
+```
+Depth/
+  └── {Area}/
+        └── *.tif (raster layers)
+```
+
+## Running Scripts
+
+```powershell
+& "C:\Program Files\QGIS 3.44.3\bin\python-qgis.bat" <script.py>
+```
+
+## Scripts Reference
+
+| Script | Purpose |
+|--------|---------|
+| `import_depths.py` | Import TIFFs into "Depth" group |
+| `remove.py` | Clear all layers under "Depth" |
+| `select.py` | Toggle layer visibility |
+| `select.py -none` | Deselect all |
+| `select.py -a <name>` | Select by area name |
+| `initiate.py` | Copy data from source mirror |
