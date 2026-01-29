@@ -3,3 +3,7 @@ For UpperWimmera and MountWilliams - selected EO1
 Natimuk catchment: M21X_NatiCatch_100yr_2hr_08_Depth
 
 Keep in mind - flood extent (and other baselayers in Pozi)
+
+cursorrules.
+
+copy features https://wimmerafloodmaps.pozi.com/
