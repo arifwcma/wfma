@@ -1,0 +1,30 @@
+Can we give the user a “locate me” option to share their location with the app and then have the default setting to open with whichever 1 in 100 yr map is in closest proximity, so people can immediately view flood risk around their current position?
+
+ 
+
+Can we have a small pop-up or other option connected to the legend that serves as a timestamp and also directs them to the full flood investigation report on the CMA website?  Eg “Horsham and Wartook Valley Flood investigation (completed 2019).  For more info see Final Report.”  This could event just replace the slightly confusing code text stuff that appears under Feature Info when I currently click on a location on the mapping.
+
+ 
+
+Can we have an “About Wimmera CMA” in the header menu or somewhere?
+
+ 
+
+Can we have a location-based feature to allow the user to search by address or place name?
+
+
+Can we have a bookmark or save locations type feature that allows users to save key places and quickly revisit them during emergencies?
+
+ 
+
+Is there a low-bandwidth mode and an offline fallback mode to allow the last map tiles to remain visible when mobile coverage is poor?
+
+ 
+
+Is there somewhere we can offer users the option to share with friends, neighbours etc?
+
+ 
+
+Should we add a feedback tool?  Pros/cons need to be weighed…
+
+Link: https://wcma.vic.gov.au/wp-content/uploads/2022/05/HorshamWartookFIFinalReport.pdf
