@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../AndroidStudioProjects/wfmc"
+		},
+		{
+			"path": "../../WebstormProjects/wfml"
 		}
 	],
 	"settings": {}
