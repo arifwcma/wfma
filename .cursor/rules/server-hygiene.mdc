@@ -1,0 +1,14 @@
+---
+description: Server configuration hygiene rules
+alwaysApply: true
+---
+
+# Server Configuration Hygiene
+
+When making changes to server config files (nginx, apache, etc.):
+
+- **Always revert temporary/superseded changes** before moving on. Never leave stale config blocks behind.
+- When a config approach is abandoned (e.g. switching from sub-path to subdomain), **proactively guide the user to clean up the old config** in the same step.
+- **Track every server file modified** during the session. Before closing out a task, verify all modified files are in their correct final state.
+- When suggesting config edits, **show the complete final file** so there's no ambiguity about what the file should look like.
+- **Never assume the user will remember** to clean up previous changes. It's the assistant's job to track and prompt.
