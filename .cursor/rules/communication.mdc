@@ -16,3 +16,4 @@ alwaysApply: true
 - Verify UI labels/locations from docs before giving click-path instructions
 - Prefer mainstream fixes over app-specific hacks
 - Read config files from this repo directly instead of asking user to paste them
+- **Before installing or configuring ANY tool/software**, ALWAYS search the web first for the latest official documentation and installation guide. Never rely on training data alone — it may be outdated. This is non-negotiable.

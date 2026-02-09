@@ -46,10 +46,14 @@ Internet
   ├─ HTTPS (443) ──► Nginx (reverse proxy + SSL termination)
   │                    ├─ wcma.work        ──► localhost:3001 (Next.js mapnj2)
   │                    ├─ wimmera.xyz      ──► localhost:3002 (Next.js xyz tiles)
-  │                    └─ testpozi.online  ──► localhost:8080 (Apache)
+  │                    └─ testpozi.online  ──► Lizmap Web Client (PHP-FPM)
+  │                                              └─ QGIS requests ──► Py-QGIS-Server (localhost:7200)
   │
-  └─ Apache (8080, internal only)
-       └─ QGIS Server (FastCGI) ──► /var/www/qgis/wfml/wfml.qgs
+  ├─ Py-QGIS-Server (7200, internal only)
+  │    └─ QGIS Server workers + Lizmap server plugin
+  │    └─ Projects root: /srv/data/
+  │
+  └─ Apache (8080, internal only, legacy — no active QGIS vhost)
 ```
 
 ## Domains & DNS (Route 53)
@@ -58,7 +62,7 @@ Internet
 |---|---|---|---|
 | wcma.work | A | 13.238.185.227 | Next.js mapnj2 (port 3001) |
 | wimmera.xyz | A | 13.238.185.227 | Next.js xyz tile server (port 3002) |
-| testpozi.online | A | 13.238.185.227 | QGIS Server via Apache (port 8080) |
+| testpozi.online | A | 13.238.185.227 | Lizmap Web Client → Py-QGIS-Server (port 7200) |
 
 ## Services & Ports
 
@@ -68,28 +72,60 @@ Internet
 | 443 | Nginx (SSL) | systemd | Certbot-managed |
 | 3001 | Next.js (mapnj2) | PM2 | `~/mapnj2/` |
 | 3002 | Next.js (xyz tiles) | PM2 | `~/xyz/` (assumed) |
-| 8080 | Apache + QGIS Server | systemd | `/etc/apache2/sites-available/` |
+| 7200 | Py-QGIS-Server | systemd (`qgis.service`) | `/srv/qgis/server.conf` |
+| 8080 | Apache (legacy, no active QGIS vhost) | systemd | `/etc/apache2/` |
 
 ## Nginx Configs
 
 - `/etc/nginx/sites-available/wcma.work` — reverse proxy to localhost:3001
-- `/etc/nginx/sites-available/testpozi.online` — reverse proxy to localhost:8080
-- `/etc/nginx/sites-available/wimmera.xyz` — reverse proxy to localhost:3002 (if configured)
+- `/etc/nginx/sites-available/testpozi.online` — serves Lizmap PHP app + SSL
+- `/etc/nginx/sites-available/wimmera.xyz` — reverse proxy to localhost:3002
 - Default site is **disabled** (removed from sites-enabled)
 
-## Apache Configs
+## Py-QGIS-Server (QGIS Server)
 
-- `/etc/apache2/ports.conf` — listens on 8080 only
-- `/etc/apache2/sites-available/qgis-server.conf` — QGIS Server virtual host
-- Modules enabled: `fcgid`, `cgi`
-- QGIS env vars set via `FcgidInitialEnv` in vhost config
+- **Installed at**: `/opt/local/py-qgis-server/` (Python venv)
+- **Config**: `/srv/qgis/server.conf`
+- **Environment file**: `/srv/qgis/config/qgis-service.env`
+- **Systemd service**: `/etc/systemd/system/qgis.service` (name: `qgis`)
+- **Port**: 7200 (bound to 127.0.0.1)
+- **Workers**: 2
+- **Plugin path**: `/srv/qgis/plugins/`
+- **Projects root**: `/srv/data/`
+- **Restart monitor**: `/var/lib/py-qgis-server/py-qgis-restartmon`
+- **Reload script**: `/usr/bin/qgis-reload`
+- **Log**: `/var/log/qgis/qgis-server.log`
+- **OWS endpoint**: `http://127.0.0.1:7200/ows/`
+- **Lizmap API endpoint**: `http://127.0.0.1:7200/lizmap/`
+- **QGIS version**: 3.34.4 (Prizren)
+- **Lizmap server plugin**: 2.13.0
 
-## QGIS Server
+## Lizmap Web Client
 
-- Binary: `/usr/lib/cgi-bin/qgis_mapserv.fcgi`
-- Project file: `/var/www/qgis/wfml/wfml.qgs`
-- Git repo: `git@github.com:arifwcma/wfml.git` cloned to `/var/www/qgis/wfml/`
-- WMS endpoint: `https://testpozi.online/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&REQUEST=GetCapabilities&MAP=/var/www/qgis/wfml/wfml.qgs`
+- **Version**: 3.9.4
+- **Path**: `/var/www/lizmap-web-client-3.9.4/`
+- **Web root symlink**: `/var/www/html/lizmap` → `/var/www/lizmap-web-client-3.9.4/lizmap/www/`
+- **Config dir**: `/var/www/lizmap-web-client-3.9.4/lizmap/var/config/`
+- **Key config files**:
+  - `lizmapConfig.ini.php` — wmsServerURL, lizmapPluginAPIURL, repositories
+  - `localconfig.ini.php` — local overrides
+  - `profiles.ini.php` — database profiles (SQLite by default)
+- **WMS Server URL**: `http://127.0.0.1:7200/ows/`
+- **Lizmap Plugin API URL**: `http://127.0.0.1:7200/lizmap/`
+- **Root repositories**: `/srv/data`
+- **Admin URL**: `https://testpozi.online/admin.php`
+- **Default admin**: `admin` (password changed on first login)
+- **PHP**: 8.3 via php8.3-fpm
+- **Database**: SQLite (in `lizmap/var/db/`)
+
+## QGIS Project (wfml)
+
+- **Git repo**: `git@github.com:arifwcma/wfml.git`
+- **Cloned to**: `/var/www/qgis/wfml/`
+- **Symlinked into Py-QGIS-Server**: `/srv/data/wfml` → `/var/www/qgis/wfml`
+- **Project file**: `wfml.qgs`
+- **Lizmap config**: `wfml.qgs.cfg` (targets Lizmap 3.9, created with Lizmap plugin 4.5.7)
+- **CRS**: EPSG:7854
 
 ## Next.js Apps
 
@@ -120,6 +156,11 @@ Internet
 - Installed via NodeSource (v22.x)
 - PM2 installed globally
 
+## Docker
+
+- Installed but **not actively used** (was attempted for Lizmap but ARM64 incompatible)
+- Can be removed if disk space needed: `sudo apt remove docker-ce docker-ce-cli containerd.io`
+
 ## Key Paths on Server
 
 | Path | Description |
@@ -127,11 +168,17 @@ Internet
 | `/home/ubuntu/mapnj2/` | mapnj2 Next.js app |
 | `/home/ubuntu/xyz/` | xyz tile server (assumed) |
 | `/var/www/qgis/wfml/` | QGIS project (wfml) |
+| `/srv/data/wfml` | Symlink to wfml project (for Py-QGIS-Server) |
+| `/srv/qgis/server.conf` | Py-QGIS-Server config |
+| `/srv/qgis/plugins/` | QGIS Server plugins (Lizmap server plugin) |
+| `/srv/qgis/config/qgis-service.env` | QGIS Server environment variables |
+| `/opt/local/py-qgis-server/` | Py-QGIS-Server Python venv |
+| `/var/www/lizmap-web-client-3.9.4/` | Lizmap Web Client |
 | `/etc/nginx/sites-available/` | Nginx vhost configs |
-| `/etc/apache2/sites-available/` | Apache vhost configs |
-| `/etc/apache2/ports.conf` | Apache port config (8080) |
+| `/etc/apache2/` | Apache (legacy, no active QGIS vhost) |
 | `/etc/letsencrypt/live/wcma.work/` | SSL certificates |
-| `/usr/lib/cgi-bin/qgis_mapserv.fcgi` | QGIS Server binary |
+| `/var/log/qgis/qgis-server.log` | QGIS Server log |
+| `/etc/systemd/system/qgis.service` | Py-QGIS-Server systemd unit |
 
 ## Server Build Date
 
