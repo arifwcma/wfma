@@ -1,0 +1,139 @@
+---
+description: Production server infrastructure and configuration details
+alwaysApply: true
+---
+
+# Production Server (EC2)
+
+## Instance Details
+
+| Property | Value |
+|---|---|
+| Provider | AWS EC2 |
+| Region | ap-southeast-2 (Sydney) |
+| Instance type | t4g.large (ARM/Graviton, 2 vCPU, 8 GB RAM) |
+| OS | Ubuntu 24.04.3 LTS (Noble) arm64 |
+| Storage | 64 GB gp3 EBS |
+| Public IP | 13.238.185.227 |
+| SSH user | ubuntu |
+| SSH key | ED25519, `C:\Users\m.rahman\assets\keys\GIS-Server.pem` |
+| PPK (PuTTY) | `C:\Users\m.rahman\assets\keys\GIS-Server.ppk` |
+
+## SSH Access
+
+```powershell
+ssh -i C:\Users\m.rahman\assets\keys\GIS-Server.pem ubuntu@13.238.185.227
+```
+
+SSH is restricted to office IP only via AWS Security Group.
+
+## Security Measures
+
+- **Auto security updates**: unattended-upgrades enabled
+- **SSH hardened**: `PermitRootLogin no`, `PasswordAuthentication no` in `/etc/ssh/sshd_config`
+- **UFW firewall**: only ports 22/tcp, 80/tcp, 443/tcp open
+- **AWS Security Group**: SSH (22) restricted to office IP; HTTP (80) and HTTPS (443) public
+- **Fail2Ban**: active, auto-blocks brute-force attempts
+- **SSL**: Let's Encrypt via Certbot, auto-renewal enabled
+- **Certificate covers**: wcma.work, testpozi.online
+- **Cert path**: `/etc/letsencrypt/live/wcma.work/`
+
+## Architecture
+
+```
+Internet
+  │
+  ├─ HTTPS (443) ──► Nginx (reverse proxy + SSL termination)
+  │                    ├─ wcma.work        ──► localhost:3001 (Next.js mapnj2)
+  │                    ├─ wimmera.xyz      ──► localhost:3002 (Next.js xyz tiles)
+  │                    └─ testpozi.online  ──► localhost:8080 (Apache)
+  │
+  └─ Apache (8080, internal only)
+       └─ QGIS Server (FastCGI) ──► /var/www/qgis/wfml/wfml.qgs
+```
+
+## Domains & DNS (Route 53)
+
+| Domain | Type | Points to | Service |
+|---|---|---|---|
+| wcma.work | A | 13.238.185.227 | Next.js mapnj2 (port 3001) |
+| wimmera.xyz | A | 13.238.185.227 | Next.js xyz tile server (port 3002) |
+| testpozi.online | A | 13.238.185.227 | QGIS Server via Apache (port 8080) |
+
+## Services & Ports
+
+| Port | Process | Manager | Config |
+|---|---|---|---|
+| 80 | Nginx | systemd | `/etc/nginx/sites-available/` |
+| 443 | Nginx (SSL) | systemd | Certbot-managed |
+| 3001 | Next.js (mapnj2) | PM2 | `~/mapnj2/` |
+| 3002 | Next.js (xyz tiles) | PM2 | `~/xyz/` (assumed) |
+| 8080 | Apache + QGIS Server | systemd | `/etc/apache2/sites-available/` |
+
+## Nginx Configs
+
+- `/etc/nginx/sites-available/wcma.work` — reverse proxy to localhost:3001
+- `/etc/nginx/sites-available/testpozi.online` — reverse proxy to localhost:8080
+- `/etc/nginx/sites-available/wimmera.xyz` — reverse proxy to localhost:3002 (if configured)
+- Default site is **disabled** (removed from sites-enabled)
+
+## Apache Configs
+
+- `/etc/apache2/ports.conf` — listens on 8080 only
+- `/etc/apache2/sites-available/qgis-server.conf` — QGIS Server virtual host
+- Modules enabled: `fcgid`, `cgi`
+- QGIS env vars set via `FcgidInitialEnv` in vhost config
+
+## QGIS Server
+
+- Binary: `/usr/lib/cgi-bin/qgis_mapserv.fcgi`
+- Project file: `/var/www/qgis/wfml/wfml.qgs`
+- Git repo: `git@github.com:arifwcma/wfml.git` cloned to `/var/www/qgis/wfml/`
+- WMS endpoint: `https://testpozi.online/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&REQUEST=GetCapabilities&MAP=/var/www/qgis/wfml/wfml.qgs`
+
+## Next.js Apps
+
+### mapnj2 (wcma.work)
+- Path: `/home/ubuntu/mapnj2/`
+- Git repo: `git@github.com:arifwcma/mapnj2.git`
+- Port: 3001
+- PM2 name: `mapnj2`
+- Uses Google Earth Engine service account: `/home/ubuntu/mapnj2/sensitive_resources/service-account.json`
+- GCP project: `gee-wcma-ndvi`
+- Service account: `gee-service@gee-wcma-ndvi.iam.gserviceaccount.com`
+
+### xyz tile server (wimmera.xyz)
+- Path: `/home/ubuntu/xyz/` (assumed)
+- Port: 3002
+- PM2 name: (check with `pm2 list`)
+- Serves XYZ raster tiles (e.g. NDVI)
+
+## PM2
+
+- Apps start on boot via `pm2 startup` + `pm2 save`
+- Check status: `pm2 list`
+- Logs: `pm2 logs <name>`
+- Restart: `pm2 restart <name>`
+
+## Node.js
+
+- Installed via NodeSource (v22.x)
+- PM2 installed globally
+
+## Key Paths on Server
+
+| Path | Description |
+|---|---|
+| `/home/ubuntu/mapnj2/` | mapnj2 Next.js app |
+| `/home/ubuntu/xyz/` | xyz tile server (assumed) |
+| `/var/www/qgis/wfml/` | QGIS project (wfml) |
+| `/etc/nginx/sites-available/` | Nginx vhost configs |
+| `/etc/apache2/sites-available/` | Apache vhost configs |
+| `/etc/apache2/ports.conf` | Apache port config (8080) |
+| `/etc/letsencrypt/live/wcma.work/` | SSL certificates |
+| `/usr/lib/cgi-bin/qgis_mapserv.fcgi` | QGIS Server binary |
+
+## Server Build Date
+
+2026-02-09 — rebuilt from scratch after previous instance was compromised.
+Previous instance terminated. All credentials rotated (AWS keys, Google service account, SSH keys).

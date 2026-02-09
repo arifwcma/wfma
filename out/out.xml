@@ -1,0 +1,2149 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<WMS_Capabilities xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/wms" xmlns:qgs="http://www.qgis.org/wms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&REQUEST=GetSchemaExtension" version="1.3.0">
+<Service>
+<Name>WMS</Name>
+<Title>WFMA - Wimmera Flood Map</Title>
+<Abstract>
+<![CDATA[ Flood depth rasters for the Wimmera region across multiple study areas and return periods ]]>
+</Abstract>
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+<Keyword>flood</Keyword>
+<Keyword>depth</Keyword>
+<Keyword>wimmera</Keyword>
+<Keyword>WCMA</Keyword>
+</KeywordList>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://wcma.vic.gov.au" xlink:type="simple"/>
+<ContactInformation>
+<ContactPersonPrimary>
+<ContactPerson>Mohammad Arifur Rahman</ContactPerson>
+<ContactOrganization>Wimmera Catchment Management Authority</ContactOrganization>
+</ContactPersonPrimary>
+<ContactPosition>Analyst Programmer</ContactPosition>
+<ContactVoiceTelephone>+61406155493</ContactVoiceTelephone>
+<ContactElectronicMailAddress>gis@wcma.vic.gov.au</ContactElectronicMailAddress>
+</ContactInformation>
+<Fees>conditions unknown</Fees>
+<AccessConstraints>None</AccessConstraints>
+</Service>
+<Capability>
+<Request>
+<GetCapabilities>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetCapabilities>
+<GetMap>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>image/png; mode=16bit</Format>
+<Format>image/png; mode=8bit</Format>
+<Format>image/png; mode=1bit</Format>
+<Format>application/dxf</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetMap>
+<GetFeatureInfo>
+<Format>text/plain</Format>
+<Format>text/html</Format>
+<Format>text/xml</Format>
+<Format>application/vnd.ogc.gml</Format>
+<Format>application/vnd.ogc.gml/3.1.1</Format>
+<Format>application/json</Format>
+<Format>application/geo+json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetFeatureInfo>
+<sld:GetLegendGraphic>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>application/json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:GetLegendGraphic>
+<sld:DescribeLayer>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:DescribeLayer>
+<qgs:GetStyles>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</qgs:GetStyles>
+</Request>
+<Exception>
+<Format>XML</Format>
+</Exception>
+<sld:UserDefinedSymbolization RemoteWCS="0" UserLayer="0" UserStyle="1" RemoteWFS="0" SupportSLD="1" InlineFeature="0"/>
+<Layer queryable="1">
+<Name>wfma</Name>
+<Title>WFMA - Wimmera Flood Map</Title>
+<Abstract>
+<![CDATA[ Flood depth rasters for the Wimmera region across multiple study areas and return periods ]]>
+</Abstract>
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+<Keyword>flood</Keyword>
+<Keyword>depth</Keyword>
+<Keyword>wimmera</Keyword>
+<Keyword>WCMA</Keyword>
+</KeywordList>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>140.320422</westBoundLongitude>
+<eastBoundLongitude>144.282259</eastBoundLongitude>
+<southBoundLatitude>-37.587049</southBoundLatitude>
+<northBoundLatitude>-35.471239</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15620398.019" maxx="16061427.576" miny="-4521252.734" maxy="-4228106.502" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.587049" maxx="-35.471239" miny="140.320422" maxy="144.282259" CRS="EPSG:4326"/>
+<BoundingBox minx="440000" maxx="790000" miny="5840000" maxy="6070000" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Depth</Name>
+<Title>Depth</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15960212.584" miny="-4491360.33" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-35.997482" miny="141.926549" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="710247.108" miny="5862695" maxy="6015391.5" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Concongella_2015</Name>
+<Title>Concongella_2015</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.629758</westBoundLongitude>
+<eastBoundLongitude>142.94357</eastBoundLongitude>
+<southBoundLatitude>-37.21722</southBoundLatitude>
+<northBoundLatitude>-36.868862</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877472.062" maxx="15912405.358" miny="-4469427.744" maxy="-4420843.665" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.21722" maxx="-36.868862" miny="142.629758" maxy="142.94357" CRS="EPSG:4326"/>
+<BoundingBox minx="645255" maxx="672457.5" miny="5879775" maxy="5917927.5" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Concongella_100y_d_Max</Name>
+<Title>Concongella_100y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.629929</westBoundLongitude>
+<eastBoundLongitude>142.943401</eastBoundLongitude>
+<southBoundLatitude>-37.217217</southBoundLatitude>
+<northBoundLatitude>-36.869</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877491.11" maxx="15912386.55" miny="-4469427.418" maxy="-4420862.851" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.217217" maxx="-36.869" miny="142.629929" maxy="142.943401" CRS="EPSG:4326"/>
+<BoundingBox minx="645270" maxx="672442.5" miny="5879775" maxy="5917912.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_100y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Concongella_10y_d_Max</Name>
+<Title>Concongella_10y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.630302</westBoundLongitude>
+<eastBoundLongitude>142.943401</eastBoundLongitude>
+<southBoundLatitude>-37.217217</southBoundLatitude>
+<northBoundLatitude>-36.886569</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877532.699" maxx="15912386.55" miny="-4469427.418" maxy="-4423307.742" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.217217" maxx="-36.886569" miny="142.630302" maxy="142.943401" CRS="EPSG:4326"/>
+<BoundingBox minx="645270" maxx="672442.5" miny="5879775" maxy="5915962.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_10y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Concongella_200y_d_Max</Name>
+<Title>Concongella_200y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.629758</westBoundLongitude>
+<eastBoundLongitude>142.94357</eastBoundLongitude>
+<southBoundLatitude>-37.21722</southBoundLatitude>
+<northBoundLatitude>-36.868862</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877472.062" maxx="15912405.358" miny="-4469427.744" maxy="-4420843.665" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.21722" maxx="-36.868862" miny="142.629758" maxy="142.94357" CRS="EPSG:4326"/>
+<BoundingBox minx="645255" maxx="672457.5" miny="5879775" maxy="5917927.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_200y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Concongella_20y_d_Max</Name>
+<Title>Concongella_20y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.629998</westBoundLongitude>
+<eastBoundLongitude>142.943401</eastBoundLongitude>
+<southBoundLatitude>-37.217217</southBoundLatitude>
+<northBoundLatitude>-36.872243</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877498.785" maxx="15912386.55" miny="-4469427.418" maxy="-4421314.173" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.217217" maxx="-36.872243" miny="142.629998" maxy="142.943401" CRS="EPSG:4326"/>
+<BoundingBox minx="645270" maxx="672442.5" miny="5879775" maxy="5917552.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_20y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Concongella_50y_d_Max</Name>
+<Title>Concongella_50y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.629935</westBoundLongitude>
+<eastBoundLongitude>142.943401</eastBoundLongitude>
+<southBoundLatitude>-37.217217</southBoundLatitude>
+<northBoundLatitude>-36.86927</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877491.749" maxx="15912386.55" miny="-4469427.418" maxy="-4420900.46" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.217217" maxx="-36.86927" miny="142.629935" maxy="142.943401" CRS="EPSG:4326"/>
+<BoundingBox minx="645270" maxx="672442.5" miny="5879775" maxy="5917882.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_50y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Concongella_5y_d_Max</Name>
+<Title>Concongella_5y_d_Max</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.632057</westBoundLongitude>
+<eastBoundLongitude>142.943401</eastBoundLongitude>
+<southBoundLatitude>-37.217194</southBoundLatitude>
+<northBoundLatitude>-36.889947</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15877728.034" maxx="15912386.55" miny="-4469424.149" maxy="-4423777.977" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.217194" maxx="-36.889947" miny="142.632057" maxy="142.943401" CRS="EPSG:4326"/>
+<BoundingBox minx="645420" maxx="672442.5" miny="5879775" maxy="5915587.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Concongella_5y_d_Max&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>Dunmunkle_2017</Name>
+<Title>Dunmunkle_2017</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.43411</westBoundLongitude>
+<eastBoundLongitude>142.776875</eastBoundLongitude>
+<southBoundLatitude>-36.952174</southBoundLatitude>
+<northBoundLatitude>-36.271887</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15855692.689" maxx="15893848.93" miny="-4432442.435" maxy="-4338097.4" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.952174" maxx="-36.271887" miny="142.43411" maxy="142.776875" CRS="EPSG:4326"/>
+<BoundingBox minx="628804.613" maxx="658214.614" miny="5909455.54" maxy="5984455.541" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI10</Name>
+<Title>Dunm17RvDepthARI10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.528072</westBoundLongitude>
+<eastBoundLongitude>142.752594</eastBoundLongitude>
+<southBoundLatitude>-36.94963</southBoundLatitude>
+<northBoundLatitude>-36.625834</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15866152.446" maxx="15891145.966" miny="-4432088.045" maxy="-4387080.415" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.94963" maxx="-36.625834" miny="142.528072" maxy="142.752594" CRS="EPSG:4326"/>
+<BoundingBox minx="636624.613" maxx="656054.614" miny="5909615.54" maxy="5945215.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI100</Name>
+<Title>Dunm17RvDepthARI100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.43411</westBoundLongitude>
+<eastBoundLongitude>142.776762</eastBoundLongitude>
+<southBoundLatitude>-36.952174</southBoundLatitude>
+<northBoundLatitude>-36.271978</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15855692.689" maxx="15893836.433" miny="-4432442.435" maxy="-4338110.069" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.952174" maxx="-36.271978" miny="142.43411" maxy="142.776762" CRS="EPSG:4326"/>
+<BoundingBox minx="628804.613" maxx="658204.614" miny="5909455.54" maxy="5984445.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI20</Name>
+<Title>Dunm17RvDepthARI20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.473628</westBoundLongitude>
+<eastBoundLongitude>142.760574</eastBoundLongitude>
+<southBoundLatitude>-36.95069</southBoundLatitude>
+<northBoundLatitude>-36.272394</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15860091.753" maxx="15892034.374" miny="-4432235.767" maxy="-4338167.402" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.95069" maxx="-36.272394" miny="142.473628" maxy="142.760574" CRS="EPSG:4326"/>
+<BoundingBox minx="632354.613" maxx="656764.614" miny="5909565.54" maxy="5984425.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI200</Name>
+<Title>Dunm17RvDepthARI200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.43422</westBoundLongitude>
+<eastBoundLongitude>142.776875</eastBoundLongitude>
+<southBoundLatitude>-36.952172</southBoundLatitude>
+<northBoundLatitude>-36.271887</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15855704.896" maxx="15893848.93" miny="-4432442.244" maxy="-4338097.4" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.952172" maxx="-36.271887" miny="142.43422" maxy="142.776875" CRS="EPSG:4326"/>
+<BoundingBox minx="628814.613" maxx="658214.614" miny="5909455.54" maxy="5984455.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI5</Name>
+<Title>Dunm17RvDepthARI5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.528972</westBoundLongitude>
+<eastBoundLongitude>142.751577</eastBoundLongitude>
+<southBoundLatitude>-36.949359</southBoundLatitude>
+<northBoundLatitude>-36.671353</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15866252.597" maxx="15891032.808" miny="-4432050.388" maxy="-4393396.126" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.949359" maxx="-36.671353" miny="142.528972" maxy="142.751577" CRS="EPSG:4326"/>
+<BoundingBox minx="636624.613" maxx="655964.614" miny="5909645.54" maxy="5940165.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Dunm17RvDepthARI50</Name>
+<Title>Dunm17RvDepthARI50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.43422</westBoundLongitude>
+<eastBoundLongitude>142.76058</eastBoundLongitude>
+<southBoundLatitude>-36.951451</southBoundLatitude>
+<northBoundLatitude>-36.272123</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15855704.896" maxx="15892035.067" miny="-4432341.819" maxy="-4338130.074" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.951451" maxx="-36.272123" miny="142.43422" maxy="142.76058" CRS="EPSG:4326"/>
+<BoundingBox minx="628814.613" maxx="656764.614" miny="5909535.54" maxy="5984455.541" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Dunm17RvDepthARI50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>HallsGap_2017</Name>
+<Title>HallsGap_2017</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>HGAP17RvDepthAR20</Name>
+<Title>HGAP17RvDepthAR20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthAR20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>HGAP17RvDepthARI10</Name>
+<Title>HGAP17RvDepthARI10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthARI10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>HGAP17RvDepthARI100</Name>
+<Title>HGAP17RvDepthARI100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthARI100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>HGAP17RvDepthARI200</Name>
+<Title>HGAP17RvDepthARI200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthARI200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>HGAP17RvDepthARI5</Name>
+<Title>HGAP17RvDepthARI5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthARI5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>HGAP17RvDepthARI50</Name>
+<Title>HGAP17RvDepthARI50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.511767</westBoundLongitude>
+<eastBoundLongitude>142.552317</eastBoundLongitude>
+<southBoundLatitude>-37.179034</southBoundLatitude>
+<northBoundLatitude>-37.124412</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15864337.359" maxx="15868851.248" miny="-4464091.214" maxy="-4456462.499" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.179034" maxx="-37.124412" miny="142.511767" maxy="142.552317" CRS="EPSG:4326"/>
+<BoundingBox minx="634294.999" maxx="637800" miny="5884195" maxy="5890200.001" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=HGAP17RvDepthARI50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>HorshamWartook_2017</Name>
+<Title>HorshamWartook_2017</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI10</Name>
+<Title>Hors19RvDepthARI10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI100</Name>
+<Title>Hors19RvDepthARI100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI20</Name>
+<Title>Hors19RvDepthARI20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI200</Name>
+<Title>Hors19RvDepthARI200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI5</Name>
+<Title>Hors19RvDepthARI5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Hors19RvDepthARI50</Name>
+<Title>Hors19RvDepthARI50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.952934</westBoundLongitude>
+<eastBoundLongitude>142.431503</eastBoundLongitude>
+<southBoundLatitude>-37.118157</southBoundLatitude>
+<northBoundLatitude>-36.607018</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15802128.376" maxx="15855402.335" miny="-4455589.068" maxy="-4384470.938" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.118157" maxx="-36.607018" miny="141.952934" maxy="142.431503" CRS="EPSG:4326"/>
+<BoundingBox minx="585218.706" maxx="627183.706" miny="5891589.53" maxy="5947779.53" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hors19RvDepthARI50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>MountWilliam_2014</Name>
+<Title>MountWilliam_2014</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>MTW_E01_100Y_050_D_MAX</Name>
+<Title>MTW_E01_100Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_100Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_10Y_050_D_MAX</Name>
+<Title>MTW_E01_10Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_10Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_200Y_050_D_MAX</Name>
+<Title>MTW_E01_200Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_200Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_20Y_050_D_MAX</Name>
+<Title>MTW_E01_20Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_20Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_50Y_050_D_MAX</Name>
+<Title>MTW_E01_50Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_50Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_5Y_050_D_MAX</Name>
+<Title>MTW_E01_5Y_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_5Y_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>MTW_E01_PMP_050_D_MAX</Name>
+<Title>MTW_E01_PMP_050_D_MAX</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.409661</westBoundLongitude>
+<eastBoundLongitude>142.888417</eastBoundLongitude>
+<southBoundLatitude>-37.373956</southBoundLatitude>
+<northBoundLatitude>-36.755356</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15852970.988" maxx="15906265.758" miny="-4491360.33" maxy="-4405061.297" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.373956" maxx="-36.755356" miny="142.409661" maxy="142.888417" CRS="EPSG:4326"/>
+<BoundingBox minx="625820" maxx="667220" miny="5862695" maxy="5930630" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=MTW_E01_PMP_050_D_MAX&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>Natimuk_2013</Name>
+<Title>Natimuk_2013</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>dep_100y</Name>
+<Title>dep_100y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_100y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>dep_10y</Name>
+<Title>dep_10y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_10y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>dep_200y</Name>
+<Title>dep_200y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_200y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>dep_20y</Name>
+<Title>dep_20y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_20y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>dep_50y</Name>
+<Title>dep_50y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_50y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>dep_5y</Name>
+<Title>dep_5y</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>141.926549</westBoundLongitude>
+<eastBoundLongitude>141.950792</eastBoundLongitude>
+<southBoundLatitude>-36.753614</southBoundLatitude>
+<northBoundLatitude>-36.729926</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15799191.189" maxx="15801889.836" miny="-4404819.135" maxy="-4401528.551" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.753614" maxx="-36.729926" miny="141.926549" maxy="141.950792" CRS="EPSG:4326"/>
+<BoundingBox minx="582732.197" maxx="584871.198" miny="5932059.071" maxy="5934666.072" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=dep_5y&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell_2024</Name>
+<Title>Stawell_2024</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15900351.022" miny="-4458453.135" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-36.985195" miny="142.727271" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="663148.597" miny="5888343.965" maxy="5905199.466" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI10</Name>
+<Title>Stawell24RvDepthARI10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI5</Name>
+<Title>Stawell24RvDepthARI5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI2000</Name>
+<Title>StawellG24RvDepthARI2000</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI2000&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI500</Name>
+<Title>StawellG24RvDepthARI500</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI500&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI200</Name>
+<Title>StawellG24RvDepthARI200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI100</Name>
+<Title>StawellG24RvDepthARI100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI50</Name>
+<Title>StawellG24RvDepthARI50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI20</Name>
+<Title>StawellG24RvDepthARI20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI10</Name>
+<Title>StawellG24RvDepthARI10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>StawellG24RvDepthARI5</Name>
+<Title>StawellG24RvDepthARI5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.756807</westBoundLongitude>
+<eastBoundLongitude>142.835284</eastBoundLongitude>
+<southBoundLatitude>-37.073767</southBoundLatitude>
+<northBoundLatitude>-36.985195</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15891615.129" maxx="15900351.022" miny="-4449393.92" maxy="-4437043.411" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.073767" maxx="-36.985195" miny="142.756807" maxy="142.835284" CRS="EPSG:4326"/>
+<BoundingBox minx="656348.596" maxx="663148.597" miny="5895497.465" maxy="5905199.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=StawellG24RvDepthARI5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI2000</Name>
+<Title>Stawell24RvDepthARI2000</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI2000&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI500</Name>
+<Title>Stawell24RvDepthARI500</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI500&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI200</Name>
+<Title>Stawell24RvDepthARI200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI100</Name>
+<Title>Stawell24RvDepthARI100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI50</Name>
+<Title>Stawell24RvDepthARI50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Stawell24RvDepthARI20</Name>
+<Title>Stawell24RvDepthARI20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.727271</westBoundLongitude>
+<eastBoundLongitude>142.813118</eastBoundLongitude>
+<southBoundLatitude>-37.13867</southBoundLatitude>
+<northBoundLatitude>-37.025679</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15888327.202" maxx="15897883.482" miny="-4458453.135" maxy="-4442686.829" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.13867" maxx="-37.025679" miny="142.727271" maxy="142.813118" CRS="EPSG:4326"/>
+<BoundingBox minx="653638.095" maxx="661040.596" miny="5888343.965" maxy="5900746.466" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Stawell24RvDepthARI20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>UpperWimmera_2014</Name>
+<Title>UpperWimmera_2014</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>UW_E01_100y_052_D_Max_g007_50</Name>
+<Title>UW_E01_100y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_100y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>UW_E01_10y_052_D_Max_g007_50</Name>
+<Title>UW_E01_10y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_10y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>UW_E01_200y_052_D_Max_g007_50</Name>
+<Title>UW_E01_200y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_200y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>UW_E01_20y_052_D_Max_g007_50</Name>
+<Title>UW_E01_20y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_20y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>UW_E01_50y_052_D_Max_g007_50</Name>
+<Title>UW_E01_50y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_50y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>UW_E01_5y_052_D_Max_g007_50</Name>
+<Title>UW_E01_5y_052_D_Max_g007.50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.848756</westBoundLongitude>
+<eastBoundLongitude>143.37303</eastBoundLongitude>
+<southBoundLatitude>-37.337651</southBoundLatitude>
+<northBoundLatitude>-36.847322</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15901850.803" maxx="15960212.584" miny="-4486276.057" maxy="-4417846.805" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.337651" maxx="-36.847322" miny="142.848756" maxy="143.37303" CRS="EPSG:4326"/>
+<BoundingBox minx="664812.108" maxx="710247.108" miny="5866046.579" maxy="5919469.079" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=UW_E01_5y_052_D_Max_g007_50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>WarracknabealBrim_2016</Name>
+<Title>WarracknabealBrim_2016</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>WaBr15Dep10</Name>
+<Title>WaBr15Dep10</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep10&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>WaBr15Dep100</Name>
+<Title>WaBr15Dep100</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep100&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>WaBr15Dep20</Name>
+<Title>WaBr15Dep20</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep20&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>WaBr15Dep200</Name>
+<Title>WaBr15Dep200</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep200&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>WaBr15Dep5</Name>
+<Title>WaBr15Dep5</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep5&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>WaBr15Dep50</Name>
+<Title>WaBr15Dep50</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.357899</westBoundLongitude>
+<eastBoundLongitude>142.436692</eastBoundLongitude>
+<southBoundLatitude>-36.620724</southBoundLatitude>
+<northBoundLatitude>-35.997482</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15847208.872" maxx="15855979.949" miny="-4386371.597" maxy="-4300274.954" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.620724" maxx="-35.997482" miny="142.357899" maxy="142.436692" CRS="EPSG:4326"/>
+<BoundingBox minx="622390.5" maxx="628468.5" miny="5946328.5" maxy="6015391.5" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=WaBr15Dep50&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>WimmeraRiverYarriambiackCreek_2010</Name>
+<Title>WimmeraRiverYarriambiackCreek_2010</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.166523</westBoundLongitude>
+<eastBoundLongitude>142.65902</eastBoundLongitude>
+<southBoundLatitude>-36.91946</southBoundLatitude>
+<northBoundLatitude>-36.245047</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15825904.988" maxx="15880729.428" miny="-4427886.373" maxy="-4334392.143" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.91946" maxx="-36.245047" miny="142.166523" maxy="142.65902" CRS="EPSG:4326"/>
+<BoundingBox minx="604803.743" maxx="647785.497" miny="5913414.992" maxy="5987618.75" CRS="EPSG:7854"/>
+<Layer queryable="1">
+<Name>l_100y_existing_flood_depths</Name>
+<Title>100y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.168022</westBoundLongitude>
+<eastBoundLongitude>142.656975</eastBoundLongitude>
+<southBoundLatitude>-36.918967</southBoundLatitude>
+<northBoundLatitude>-36.245062</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15826071.921" maxx="15880501.812" miny="-4427817.77" maxy="-4334394.144" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.918967" maxx="-36.245062" miny="142.168022" maxy="142.656975" CRS="EPSG:4326"/>
+<BoundingBox minx="604939.218" maxx="647604.219" miny="5913468.749" maxy="5987618.75" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_100y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>l_10y_existing_flood_depths</Name>
+<Title>10y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.166524</westBoundLongitude>
+<eastBoundLongitude>142.657868</eastBoundLongitude>
+<southBoundLatitude>-36.918997</southBoundLatitude>
+<northBoundLatitude>-36.24565</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15825905.09" maxx="15880601.191" miny="-4427821.962" maxy="-4334475.394" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.918997" maxx="-36.24565" miny="142.166524" maxy="142.657868" CRS="EPSG:4326"/>
+<BoundingBox minx="604803.745" maxx="647683.746" miny="5913467.081" maxy="5987552.082" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_10y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>l_200y_existing_flood_depths</Name>
+<Title>200y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.166523</westBoundLongitude>
+<eastBoundLongitude>142.657593</eastBoundLongitude>
+<southBoundLatitude>-36.919252</southBoundLatitude>
+<northBoundLatitude>-36.245593</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15825904.988" maxx="15880570.573" miny="-4427857.417" maxy="-4334467.529" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.919252" maxx="-36.245593" miny="142.166523" maxy="142.657593" CRS="EPSG:4326"/>
+<BoundingBox minx="604803.743" maxx="647658.744" miny="5913438.828" maxy="5987558.829" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_200y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>l_20y_existing_flood_depths</Name>
+<Title>20y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.167202</westBoundLongitude>
+<eastBoundLongitude>142.658169</eastBoundLongitude>
+<southBoundLatitude>-36.919022</southBoundLatitude>
+<northBoundLatitude>-36.245047</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15825980.597" maxx="15880634.685" miny="-4427825.431" maxy="-4334392.143" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.919022" maxx="-36.245047" miny="142.167202" maxy="142.658169" CRS="EPSG:4326"/>
+<BoundingBox minx="604865.497" maxx="647710.498" miny="5913463.554" maxy="5987618.555" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_20y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>l_50y_existing_flood_depths</Name>
+<Title>50y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.167203</westBoundLongitude>
+<eastBoundLongitude>142.65902</eastBoundLongitude>
+<southBoundLatitude>-36.91946</southBoundLatitude>
+<northBoundLatitude>-36.245068</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15825980.65" maxx="15880729.428" miny="-4427886.373" maxy="-4334394.991" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.91946" maxx="-36.245068" miny="142.167203" maxy="142.65902" CRS="EPSG:4326"/>
+<BoundingBox minx="604865.496" maxx="647785.497" miny="5913414.992" maxy="5987614.993" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_50y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>l_5y_existing_flood_depths</Name>
+<Title>5y_existing_flood_depths</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>142.168743</westBoundLongitude>
+<eastBoundLongitude>142.657585</eastBoundLongitude>
+<southBoundLatitude>-36.918991</southBoundLatitude>
+<northBoundLatitude>-36.264097</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15826152.162" maxx="15880569.679" miny="-4427821.112" maxy="-4337021.847" CRS="EPSG:3857"/>
+<BoundingBox minx="-36.918991" maxx="-36.264097" miny="142.168743" maxy="142.657585" CRS="EPSG:4326"/>
+<BoundingBox minx="604978.493" maxx="647658.494" miny="5913465.601" maxy="5985505.602" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=l_5y_existing_flood_depths&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>wcma_boundary___boundary_4326</Name>
+<Title>wcma_boundary — boundary_4326</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>140.963783</westBoundLongitude>
+<eastBoundLongitude>143.363962</eastBoundLongitude>
+<southBoundLatitude>-37.368097</southBoundLatitude>
+<northBoundLatitude>-35.656805</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="15692016.562" maxx="15959203.169" miny="-4490539.672" maxy="-4253500.515" CRS="EPSG:3857"/>
+<BoundingBox minx="-37.368097" maxx="-35.656805" miny="140.963783" maxy="143.363962" CRS="EPSG:4326"/>
+<BoundingBox minx="496721.779" maxx="713997.129" miny="5861670.344" maxy="6054115.365" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=wcma_boundary___boundary_4326&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Cart</Name>
+<Title>Cart</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:7854</CRS>
+<CRS>EPSG:4326</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.051129</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox minx="-20037508.343" maxx="20037508.343" miny="-20037508.343" maxy="20037508.343" CRS="EPSG:3857"/>
+<BoundingBox minx="-85.051129" maxx="85.051129" miny="-180" maxy="180" CRS="EPSG:4326"/>
+<BoundingBox minx="-14045294.411" maxx="16629347.042" miny="-9354952.162" maxy="29354952.162" CRS="EPSG:7854"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://testpozi.online/cgi-bin/qgis_mapserv.fcgi?MAP=/var/www/qgis/wfml/wfml.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Cart&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+</Capability>
+</WMS_Capabilities>
