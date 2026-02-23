@@ -17,3 +17,6 @@ alwaysApply: true
 - Prefer mainstream fixes over app-specific hacks
 - Read config files from this repo directly instead of asking user to paste them
 - **Before installing or configuring ANY tool/software**, ALWAYS search the web first for the latest official documentation and installation guide. Never rely on training data alone — it may be outdated. This is non-negotiable.
+- **No sloppy work**: Never attempt extensive manual engineering or hacks. If the proper solution requires a well-known package or tool, use it. It is better to drop a requirement than to deliver a fragile hack.
+- **Always prefer mainstream approaches**: Use established packages, official APIs, and community-standard patterns. If a manual approach and a package both exist, pick the package.
+- **Never do case-specific solutions**: When solving something, factor in ALL cases — not just the device or scenario currently being discussed. For example, when fixing a splash screen, don't only target the current phone; consider tablets, different Android versions, screen densities, and other form factors from the start.
